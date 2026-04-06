@@ -11,6 +11,7 @@ TEST(ThreadManagementTest, JoiningThread)
     ASSERT_FALSE(jt1.joinable());
     jt1 = joining_thread(std::thread([](){}));
     jt1 = joining_thread([](){});
+    jt1 = std::thread([](){});
     ASSERT_FALSE(std::is_function_v<joining_thread>);
     auto tid1 = jt1.get_id();
     joining_thread jt2(std::move(jt1));

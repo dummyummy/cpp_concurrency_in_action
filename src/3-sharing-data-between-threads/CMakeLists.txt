@@ -8,7 +8,7 @@ if (NOT lib_srcs)
     set(lib_srcs "${dummy_src}")
 endif()
 
-add_library(ThreadManagementLib STATIC ${lib_srcs})
-add_library(CppConcurrency::ThreadManagement ALIAS ThreadManagementLib)
+add_library(SharingDataBetweenThreadsLib STATIC ${lib_srcs})
+add_library(CppConcurrency::SharingDataBetweenThreads ALIAS SharingDataBetweenThreadsLib)
 
-target_include_directories(ThreadManagementLib PUBLIC ${PROJECT_SOURCE_DIR}/include/2-thread-management)
+target_include_directories(SharingDataBetweenThreadsLib PUBLIC ${PROJECT_SOURCE_DIR}/include/3-sharing-data-between-threads)

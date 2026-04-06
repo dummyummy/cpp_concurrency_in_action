@@ -11,9 +11,11 @@ copy_sanitizer_dll(CppConcurrencyTests)
 include(GoogleTest)
 
 add_subdirectory(2-thread-management)
+add_subdirectory(3-sharing-data-between-threads)
 
-target_link_libraries(CppConcurrencyTests PRIVATE 
-    ThreadManagementTests
+target_link_libraries(CppConcurrencyTests PRIVATE
+  ThreadManagementTests
+  SharingDataBetweenThreadsTests
 )
 
 gtest_discover_tests(CppConcurrencyTests)
