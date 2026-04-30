@@ -1,13 +1,22 @@
-add_library(Sanitizer INTERFACE)
+add_library(ASanitizer INTERFACE)
 if (MSVC)
-    target_compile_options(Sanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=address>)
-    target_link_options(Sanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=address>)
+    target_compile_options(ASanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=address,undefined>)
+    target_link_options(ASanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=address,undefined>)
 else()
-    target_compile_options(Sanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=address -fno-omit-frame-pointer>)
-    target_link_options(Sanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=address>)
+    target_compile_options(ASanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=address,undefined -fno-omit-frame-pointer>)
+    target_link_options(ASanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=address,undefined>)
 endif()
 
-function(copy_sanitizer_dll target_name)
+add_library(TSanitizer INTERFACE)
+if (MSVC)
+    target_compile_options(TSanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=thread,undefined>)
+    target_link_options(TSanitizer INTERFACE $<$<CONFIG:Debug>:/fsanitize=thread,undefined>)
+else()
+    target_compile_options(TSanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=thread,undefined -fno-omit-frame-pointer>)
+    target_link_options(TSanitizer INTERFACE $<$<CONFIG:Debug>:-fsanitize=thread,undefined>)
+endif()
+
+function(copy_address_sanitizer_dll target_name)
     set(ASAN_DLL_NAME "clang_rt.asan_dynamic-x86_64.dll")
 
     execute_process(

@@ -4,9 +4,9 @@ add_executable(
 )
 
 target_link_libraries(
-  CppConcurrencyTests PRIVATE GTest::gtest Sanitizer
+  CppConcurrencyTests PRIVATE GTest::gtest TSanitizer
 )
-copy_sanitizer_dll(CppConcurrencyTests)
+copy_address_sanitizer_dll(CppConcurrencyTests)
 
 include(GoogleTest)
 
