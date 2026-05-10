@@ -1,6 +1,11 @@
+#pragma once
+
 #include <climits>
 #include <mutex>
 #include <stdexcept>
+
+namespace CppConcurrency
+{
 class hierarchical_mutex
 {
   private:
@@ -59,3 +64,4 @@ class hierarchical_mutex
 };
 
 inline thread_local unsigned long hierarchical_mutex::this_thread_hierarchy_value(ULONG_MAX);
+} // namespace CppConcurrency

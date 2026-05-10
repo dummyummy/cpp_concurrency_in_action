@@ -6,12 +6,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+# Sanitizer 选项
+option(USE_SANITIZER "Enable sanitizer" ON)
+option(USE_ASAN "Use AddressSanitizer" OFF)
+option(USE_TSAN "Use ThreadSanitizer" ON)
+
 include(Sanitizer)
 
 if(POLICY CMP0091)
     cmake_policy(SET CMP0091 NEW)
 endif()
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+endif()
 
 if(POLICY CMP0135)
     cmake_policy(SET CMP0135 NEW)
@@ -42,7 +50,7 @@ set(GTEST_TARGETS gtest)
 foreach(_target ${GTEST_TARGETS})
     if(TARGET ${_target})
         if (NOT ${gtest_enable_tsan})
-            target_link_libraries(${_target} PRIVATE Sanitizer)
+            target_link_libraries(${_target} PRIVATE ASanitizer)
             message(STATUS "Injecting ASan flags into target: ${_target}")
         else()
             target_link_libraries(${_target} PRIVATE TSanitizer)
