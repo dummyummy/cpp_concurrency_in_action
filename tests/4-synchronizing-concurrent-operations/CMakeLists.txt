@@ -8,6 +8,6 @@ if (NOT test_srcs)
     set(test_srcs "${dummy_src}")
 endif()
 
-add_library(ThreadManagementTests OBJECT ${test_srcs})
+add_library(SynchronizingConcurrentOperationsTests OBJECT ${test_srcs})
 
-target_link_libraries(ThreadManagementTests PUBLIC CppConcurrency PRIVATE GTest::gtest TSanitizer)
+target_link_libraries(SynchronizingConcurrentOperationsTests PUBLIC CppConcurrency PRIVATE GTest::gtest TSanitizer)

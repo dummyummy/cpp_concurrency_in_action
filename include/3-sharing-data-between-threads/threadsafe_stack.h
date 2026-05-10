@@ -5,6 +5,8 @@
 #include <mutex>
 #include <stack>
 
+namespace CppConcurrency
+{
 struct empty_stack : std::exception
 {
     const char *what() const noexcept override
@@ -59,3 +61,4 @@ template <typename T> class threadsafe_stack
         return data.empty();
     }
 };
+} // namespace CppConcurrency

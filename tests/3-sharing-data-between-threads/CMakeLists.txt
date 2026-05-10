@@ -10,4 +10,4 @@ endif()
 
 add_library(SharingDataBetweenThreadsTests OBJECT ${test_srcs})
 
-target_link_libraries(SharingDataBetweenThreadsTests PUBLIC CppConcurrency PRIVATE GTest::gtest Sanitizer)
+target_link_libraries(SharingDataBetweenThreadsTests PUBLIC CppConcurrency PRIVATE GTest::gtest TSanitizer)

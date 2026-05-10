@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include <thread>
-#include <type_traits>
 
 #include "joining_thread.h"
 
@@ -9,8 +8,8 @@ TEST(ThreadManagementTest, JoiningThread)
     using namespace CppConcurrency;
     joining_thread jt1;
     ASSERT_FALSE(jt1.joinable());
-    jt1 = joining_thread(std::thread([](){}));
-    jt1 = joining_thread([](){});
+    jt1 = joining_thread(std::thread([]() {}));
+    jt1 = joining_thread([]() {});
     jt1 = std::thread([](){});
     ASSERT_FALSE(std::is_function_v<joining_thread>);
     auto tid1 = jt1.get_id();

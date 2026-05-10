@@ -4,6 +4,8 @@
 
 #include "threadsafe_stack.h"
 
+using namespace CppConcurrency;
+
 TEST(ThreadsafeStackTest, BasicPushPop) {
     threadsafe_stack<int> stack;
     
